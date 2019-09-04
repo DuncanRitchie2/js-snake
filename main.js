@@ -44,6 +44,8 @@ const boardDiv = document.getElementById("board");
 const foodDiv = document.getElementById("food");
 const snakeHeadDiv = document.getElementById("snake-head");
 const snakeJointDivs = document.getElementsByClassName("snake-joint");
+const lengthP = document.getElementById("length-p");
+const lengthSpan = document.getElementById("length-span");
 const startButton = document.getElementById("start-button");
 
 
@@ -86,6 +88,8 @@ const growSnake = (newX, newY) => {
     newJointDiv = document.createElement("div");
     newJointDiv.className = "snake-joint";
     boardDiv.appendChild(newJointDiv);
+
+    lengthSpan.textContent = snake.length;
 }
 
 const eatFood = () => {
@@ -180,6 +184,7 @@ const startGame = () => {
     startButton.remove();
     const interval = setInterval(moveSnake,1000);
     placeSnake();
+    lengthP.style.display = "initial";
 }
 
 ////
