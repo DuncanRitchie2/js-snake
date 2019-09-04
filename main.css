@@ -46,7 +46,7 @@ body {
 }
 
 .snake-joint {
-    position: relative;
+    position: absolute;
     left: 0px;
     top: 40px;
     width: 20px;

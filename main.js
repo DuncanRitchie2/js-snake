@@ -84,24 +84,22 @@ const eatFood = () => {
 }
 
 const placeSnake = () => {
-    // Move the snake-head.
-    snakeHeadDiv.style.left = (snake[0].x * cellSize)+"px";
-    snakeHeadDiv.style.top = (snake[0].y * cellSize)+"px";
-
-    // If we will be growing the snake, we will be adding a joint where the last joint was.
-    lastX = snake[snake.length-1].x;
-    lastY = snake[snake.length-1].y;
-
-    // Move each snake-joint.
-    for (let i = 0; i < snakeJointDivs.length; i++) {
-        snakeJointDivs[i].style.left = (snake[i+1].x * cellSize) + "px";
-        snakeJointDivs[i].style.top = (snake[i+1].y * cellSize) + "px";
-    }
 
     // If the snake reaches the food...
     if (snake[0].x==food.x && snake[0].y==food.y) {
         eatFood();
+
+        // We will be adding a joint where the last joint was.
+        // So we need to know that position.
+        lastX = snake[snake.length-1].x;
+        lastY = snake[snake.length-1].y;
         growSnake(lastX, lastY);
+    }
+
+    // Position each snake-joint.
+    for (let i = 0; i < snakeJointDivs.length; i++) {
+        snakeJointDivs[i].style.left = (snake[i].x * cellSize) + "px";
+        snakeJointDivs[i].style.top = (snake[i].y * cellSize) + "px";
     }
 }
 
