@@ -65,12 +65,25 @@ const placeFood = () => {
     foodDiv.style.top = (y * cellSize)+"px";
 }
 
+const eatFood = () => {
+    console.log("Eating the food!")
+    placeFood();
+}
+
 const placeSnake = () => {
+    // Move the snake-head.
     snakeHeadDiv.style.left = (snake[0].x * cellSize)+"px";
     snakeHeadDiv.style.top = (snake[0].y * cellSize)+"px";
+
+    // Move each snake-joint.
     for (let i = 0; i < snakeJointDivs.length; i++) {
         snakeJointDivs[i].style.left = (snake[i+1].x * cellSize) + "px";
         snakeJointDivs[i].style.top = (snake[i+1].y * cellSize) + "px";
+    }
+
+    // If the snake reaches the food...
+    if (snake[0].x==food.x && snake[0].y==food.y) {
+        eatFood();
     }
 }
 
