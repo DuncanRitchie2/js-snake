@@ -32,6 +32,7 @@ body {
     background-image: url(https://wpclipart.com/animals/M/mouse/mouse_2/mouse_T.png);
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 #snake-head {

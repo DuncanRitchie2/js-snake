@@ -152,7 +152,8 @@ const changeDirection = (e) => {
 const startGame = () => {
     document.addEventListener("keydown",changeDirection);
     startButton.remove();
-    const interval = setInterval(moveSnake,1000)
+    const interval = setInterval(moveSnake,1000);
+    placeSnake();
 }
 
 ////
