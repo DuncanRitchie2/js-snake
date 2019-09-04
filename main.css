@@ -12,6 +12,8 @@ body {
     height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #board {
@@ -50,4 +52,10 @@ body {
     height: 20px;
     background-color: lightgreen;
     border-radius: 50%;
+}
+
+#start-button {
+    font-family: inherit;
+    font-size: 18px;
+    margin-top: 12px;
 }
