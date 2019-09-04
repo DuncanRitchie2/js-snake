@@ -40,6 +40,7 @@ let direction = "right";
 //// DOM ELEMENTS
 ////
 
+const boardDiv = document.getElementById("board");
 const foodDiv = document.getElementById("food");
 const snakeHeadDiv = document.getElementById("snake-head");
 const snakeJointDivs = document.getElementsByClassName("snake-joint");
@@ -52,17 +53,29 @@ const startButton = document.getElementById("start-button");
 ////
 
 const placeFood = () => {
+    // Randomize values of x and y.
     x = Math.floor(Math.random()*boardWidth);
     y = Math.floor(Math.random()*boardHeight);
 
+    // Set food to the values.
     food.x = x;
     food.y = y;
 
     console.log("x = "+x)
     console.log("y = "+y)
 
+    // Change CSS positioning.
     foodDiv.style.left = (x * cellSize)+"px";
     foodDiv.style.top = (y * cellSize)+"px";
+}
+
+const growSnake = (newX, newY) => {
+    newJoint = {x: newX, y: newY};
+    snake.push(newJoint);
+    
+    newJointDiv = document.createElement("div");
+    newJointDiv.className = "snake-joint";
+    boardDiv.appendChild(newJointDiv);
 }
 
 const eatFood = () => {
@@ -75,6 +88,10 @@ const placeSnake = () => {
     snakeHeadDiv.style.left = (snake[0].x * cellSize)+"px";
     snakeHeadDiv.style.top = (snake[0].y * cellSize)+"px";
 
+    // If we will be growing the snake, we will be adding a joint where the last joint was.
+    lastX = snake[snake.length-1].x;
+    lastY = snake[snake.length-1].y;
+
     // Move each snake-joint.
     for (let i = 0; i < snakeJointDivs.length; i++) {
         snakeJointDivs[i].style.left = (snake[i+1].x * cellSize) + "px";
@@ -84,6 +101,7 @@ const placeSnake = () => {
     // If the snake reaches the food...
     if (snake[0].x==food.x && snake[0].y==food.y) {
         eatFood();
+        growSnake(lastX, lastY);
     }
 }
 
