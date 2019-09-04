@@ -54,8 +54,18 @@ const startButton = document.getElementById("start-button");
 
 const placeFood = () => {
     // Randomize values of x and y.
-    x = Math.floor(Math.random()*boardWidth);
-    y = Math.floor(Math.random()*boardHeight);
+    // But we can't have them colliding with the snake!
+    let randomNeeded = true;
+    while (randomNeeded) {
+        x = Math.floor(Math.random()*boardWidth);
+        y = Math.floor(Math.random()*boardHeight);
+        randomNeeded = false;
+        snake.map((joint)=>{
+            if (joint.x==x && joint.y==y) {
+                randomNeeded = true;
+            }
+        })
+    }
 
     // Set food to the values.
     food.x = x;
