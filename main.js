@@ -51,10 +51,13 @@ const lengthSpan = document.getElementById("length-span");
 const startButton = document.getElementById("start-button");
 const pauseButton = document.getElementById("pause-button");
 const resumeButton = document.getElementById("resume-button");
+const resetButton = document.getElementById("reset-button");
 const rubric = document.getElementById("rubric");
 const moveButtonsUl = document.getElementById("move-buttons-ul");
 const moveButtons = document.getElementsByClassName("move-button");
 const startOrResume = document.getElementById("start-or-resume");
+const gameOverMessage = document.getElementById("game-over-message");
+const gameOverLengthSpan = document.getElementById("game-over-length-span");
 
 
 
@@ -99,19 +102,49 @@ const placeFood = () => {
 }
 
 const growSnake = (newX, newY) => {
+    // The parameters are passed in from placeSnake() and are the x-
+    // and y-position of the last joint before the snake last moved.
     newJoint = {x: newX, y: newY};
     snake.push(newJoint);
     
+    // Create a new HTML element for the new joint.
     newJointDiv = document.createElement("div");
     newJointDiv.className = "snake-joint";
     boardDiv.appendChild(newJointDiv);
 
+    // Update the number onscreen.
     lengthSpan.textContent = snake.length;
 }
 
 const eatFood = () => {
     console.log("Eating the food!")
     placeFood();
+}
+
+const gameOver = () => {
+    gameInPlay = false;
+
+    // Hide and show elements.
+    toggleElementVisibility(moveButtonsUl);
+    toggleElementVisibility(pauseButton);
+    toggleElementVisibility(gameOverMessage);
+    toggleElementVisibility(lengthP);
+    toggleElementVisibility(resetButton);
+
+    // Ensure snake-head is visible over the joint it's eating.
+    snakeHeadDiv.style.zIndex = 1;
+
+    // Show score.
+    gameOverLengthSpan.textContent = snake.length;
+}
+
+const checkCollisions = () => {
+    for (let i = 4; i < snake.length; i++) {
+        if (snake[0].x == snake[i].x
+          && snake[0].y == snake[i].y) {
+            gameOver();
+        }
+    }
 }
 
 const placeSnake = () => {
@@ -142,6 +175,7 @@ const moveSnake = () => {
             snake[i].y = snake[i-1].y;
         }
         // Assign the snake-head to its new position.
+        // If the snake-head is at an edge, move it to the other side.
         switch (direction) {
             case "up":
                 if (snake[0].y == 0) {
@@ -175,6 +209,9 @@ const moveSnake = () => {
                     snake[0].x++;
                 }
         }
+        // Check whether snake is eating itself.
+        checkCollisions();
+
         // Update CSS positioning.
         placeSnake();
     }
@@ -188,6 +225,7 @@ const toggleMoveButtons = () => {
     }
 
     // Disable the button opposite to the current direction
+    // and set the current direction's button to "selected".
     switch (direction) {
         case "up":
             moveButtons[3].disabled = true;
@@ -209,6 +247,7 @@ const toggleMoveButtons = () => {
 
 
 const changeDirectionFromKey = (e) => {
+    // Keypresses only change direction if we are in play.
     if (gameInPlay) {
         let oldDirection = direction;
 
@@ -272,48 +311,51 @@ const resumeGame = (interval) => {
     gameInPlay = true;
 
     // Hide and show elements.
-    rubric.className = "hidden";
-    moveButtonsUl.className = "not-hidden";
-
-    resumeButton.className = "hidden";
-    pauseButton.className = "not-hidden";
+    toggleElementVisibility(rubric);
+    toggleElementVisibility(moveButtonsUl);
+    toggleElementVisibility(pauseButton);
+    toggleElementVisibility(resumeButton);
 }
 
-const pauseGame = (interval) => {
+const pauseGame = () => {
     gameInPlay = false;
 
     // Hide and show elements.
-    rubric.className = "not-hidden";
-    moveButtonsUl.className = "hidden";
+    toggleElementVisibility(rubric);
+    toggleElementVisibility(moveButtonsUl);
+    toggleElementVisibility(pauseButton);
+    toggleElementVisibility(resumeButton);
 
-    pauseButton.className = "hidden";
-    resumeButton.className = "not-hidden";
-
-    // Rubric needs to update to "Click Resume game and..."
-    startOrResume.textContent = "Resume";
+    // Rubric needs to update to 'Click "Resume game" and...'
+    startOrResume.textContent = "Resume game";
 }
 
 const startGame = () => {
-    document.addEventListener("keydown",changeDirectionFromKey);
-    startButton.remove();
+    // Start game-play.
     const interval = setInterval(moveSnake, 200);
     placeSnake();
-    rubric.style.flex = 0;
-    lengthP.style.display = "initial";
-    toggleElementVisibility(rubric);
-    toggleElementVisibility(moveButtonsUl);
-
     gameInPlay = true;
 
-    pauseButton.className = "not-hidden";
+    // Hide and show elements.
+    toggleElementVisibility(lengthP);
+    toggleElementVisibility(rubric);
+    toggleElementVisibility(moveButtonsUl);
+    toggleElementVisibility(pauseButton);
+    toggleElementVisibility(startButton);
+
+    // Add event-listener for key-presses
+    document.addEventListener("keydown",changeDirectionFromKey);
+
+    // Add event-listener to pause.
     pauseButton.addEventListener("click", pauseGame)
 
-    // resume-button is hidden, but let's add an event-listener for if it get displayed.
-    resumeButton.addEventListener("click", resumeGame)
+    // resume-button and reset-button are hidden, but let's add event-listeners for if they will get displayed.
+    resumeButton.addEventListener("click", resumeGame);
+    resetButton.addEventListener("click", ()=>{location.reload()})
 }
 
 ////
-//// GAME START
+//// ON PAGE LOAD
 ////
 
 placeFood();

@@ -10,12 +10,14 @@
 </head>
 <body>
     <div id="main">
+        <!-- Title -->
         <h1>
             Duncan&rsquo;s Snake
         </h1>
+        <!-- Rubric -->
         <div id="rubric" class="not-hidden">
             <p>
-                Click &ldquo;<span id="start-or-resume">Start</span> game!&rdquo; and use the buttons that appear (or WASD keys) to change your snake&rsquo;s direction.
+                Click &ldquo;<span id="start-or-resume">Start game!</span>&rdquo; and use the buttons that appear (or WASD keys) to change your snake&rsquo;s direction.
             </p>
             <p>
                 The snake grows when its head (dark green) collides with the food, and the food moves to a new position.
@@ -24,24 +26,34 @@
                 Your snake can go through the edge of the board and appear on the other side.
             </p>
             <p>
-                It can also move through itself.
+                It&rsquo;s game over if the snake bites itself.
             </p>
         </div>
+        <!-- Game-over message -->
+        <div class="hidden" id="game-over-message">
+            <h2>Your snake has bitten itself!</h2>
+            <p>Game over. Your snake was <span id="game-over-length-span">5</span> joints long.</p>
+        </div>
+        <!-- Move buttons -->
         <ul id="move-buttons-ul" class="hidden">
             <li><button class="move-button" id="move-up"><span>&#8593;</span></button></li>
             <li><button disabled class="move-button" id="move-left"><span>&#8592;</span></button></li>
             <li><button class="move-button selected" id="move-right"><span>&#8594;</span></button></li>
             <li><button class="move-button" id="move-down"><span>&#8595;</span></button></li>
         </ul>
+        <!-- Board -->
         <div id="board">
             <div id="food"></div>
             <div id="snake-head" class="snake-joint"></div>
             <div class="snake-joint"></div>
         </div>
-        <p id="length-p">Length of snake: <span id="length-span">2</span></p>
+        <!-- In-game alert of current score -->
+        <p class="hidden" id="length-p">Length of snake: <span id="length-span">2</span></p>
+        <!-- Game-play buttons -->
         <button id="start-button">Start game!</button>
         <button class="hidden" id="pause-button">Pause game</button>
         <button class="hidden" id="resume-button">Resume game</button>
+        <button class="hidden" id="reset-button">Reset game</button>
     </div>
     
     <footer>
