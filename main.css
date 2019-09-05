@@ -39,15 +39,15 @@ h1 {
 
 .not-hidden {
     max-height: 500px;
-    clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     opacity: 1;
-    transition: clip-path 2s, max-height 2s ease-out, opacity 2s;
+    transition: clip-path 2s, max-height 1.5s ease-out, opacity 2s;
 }
 
 .hidden {
     padding: 0 12px 6px;
     max-height: 0;
-    clip-path: polygon(0 0, 100% 0, 0 0, 100% 0);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     opacity: 0;
     transition: clip-path 2s, max-height 1s, opacity 2s;
 }
@@ -59,6 +59,14 @@ h1 {
 #rubric p {
     margin-top: 0;
     margin-bottom: 9px;
+}
+
+button {
+    font-family: inherit;
+    font-size: 18px;
+    margin-top: 12px;
+    margin: 0;
+    padding: 6px 12px;
 }
 
 #move-buttons-ul {
@@ -150,18 +158,12 @@ h1 {
     border-radius: 50%;
 }
 
-#start-button {
-    font-family: inherit;
-    font-size: 18px;
-    margin-top: 12px;
-}
-
 #length-p {
     display: none;
 }
 
 
-
+/* Footer and unordered lists */
 
 ul {
     padding: 0
@@ -170,6 +172,7 @@ ul {
 li {
     list-style-type: none;
 }
+
 footer {
     position: fixed;
     bottom: 0;
