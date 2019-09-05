@@ -55,6 +55,8 @@ const rubric = document.getElementById("rubric");
 const moveButtonsUl = document.getElementById("move-buttons-ul");
 const moveButtons = document.getElementsByClassName("move-button");
 const startOrResume = document.getElementById("start-or-resume");
+const gameOverMessage = document.getElementById("game-over-message");
+const gameOverLengthSpan = document.getElementById("game-over-length-span");
 
 
 
@@ -116,6 +118,31 @@ const growSnake = (newX, newY) => {
 const eatFood = () => {
     console.log("Eating the food!")
     placeFood();
+}
+
+const gameOver = () => {
+    gameInPlay = false;
+
+    // Hide and show elements.
+    toggleElementVisibility(moveButtonsUl);
+    toggleElementVisibility(pauseButton);
+    toggleElementVisibility(gameOverMessage);
+    toggleElementVisibility(lengthP);
+
+    // Ensure snake-head is visible over the joint it's eating.
+    snakeHeadDiv.style.zIndex = 1;
+
+    // Show score.
+    gameOverLengthSpan.textContent = snake.length;
+}
+
+const checkCollisions = () => {
+    for (let i = 4; i < snake.length; i++) {
+        if (snake[0].x == snake[i].x
+          && snake[0].y == snake[i].y) {
+            gameOver();
+        }
+    }
 }
 
 const placeSnake = () => {
@@ -180,6 +207,9 @@ const moveSnake = () => {
                     snake[0].x++;
                 }
         }
+        // Check whether snake is eating itself.
+        checkCollisions();
+
         // Update CSS positioning.
         placeSnake();
     }
@@ -285,7 +315,7 @@ const resumeGame = (interval) => {
     toggleElementVisibility(resumeButton);
 }
 
-const pauseGame = (interval) => {
+const pauseGame = () => {
     gameInPlay = false;
 
     // Hide and show elements.
