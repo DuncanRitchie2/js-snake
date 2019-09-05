@@ -32,44 +32,46 @@ body {
 
 h1 {
     background-image: linear-gradient(salmon, hotpink, salmon);
-    width: 100%;
+    width: calc(100% - 12px);
     padding: 6px;
-    margin: 18px 0 9px;
+    margin: 18px 0 4px;
 }
 
 .not-hidden {
     max-height: 500px;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     opacity: 1;
-    transition: clip-path 2s, max-height 1.5s ease-out, opacity 2s;
+    padding: 0 12px 6px;
+    transition: clip-path 2s, max-height 1.5s ease-out, opacity 2s, padding 2s, margin 2s;
 }
 
 .hidden {
-    padding: 0 12px 6px;
     max-height: 0;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     opacity: 0;
-    transition: clip-path 2s, max-height 1s, opacity 2s;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    transition: clip-path 2s, max-height 1s, opacity 2s, border 2s;
 }
 
 #rubric {
     padding: 0 12px;
 }
 
-#rubric p {
+#rubric p:not(:last-of-type) {
     margin-top: 0;
     margin-bottom: 9px;
 }
 
-button {
+button:not(.hidden) {
     font-family: inherit;
     font-size: 18px;
-    margin-top: 12px;
     margin: 0;
     padding: 6px 12px;
 }
 
-#move-buttons-ul {
+#move-buttons-ul:not(.hidden) {
     width: 120px;
     height: 120px;
     display: flex;
@@ -77,6 +79,9 @@ button {
     flex-direction: row-reverse;
     clip-path: circle();
     transform: rotateZ(-45deg);
+    margin: 6px 0 12px;
+    padding: 0;
+    margin-left: 0;
 }
 
 #move-buttons-ul li {
@@ -156,6 +161,10 @@ button {
     height: 20px;
     background-image: radial-gradient(circle at top, rgb(184, 229, 147), rgb(96, 163, 42));
     border-radius: 50%;
+}
+
+#length-p {
+    margin: 9px 0 0;
 }
 
 
