@@ -170,9 +170,38 @@ const moveSnake = () => {
     placeSnake();
 }
 
+const toggleMoveButtons = () => {
+    // Enable all buttons.
+    for (let i = 0; i < 4; i++) {
+        moveButtons[i].disabled = false;
+        moveButtons[i].className = "move-button";
+    }
+
+    // Disable the button opposite to the current direction
+    switch (direction) {
+        case "up":
+            moveButtons[3].disabled = true;
+            moveButtons[0].className = "move-button selected";
+            break;
+        case "left":
+            moveButtons[2].disabled = true;
+            moveButtons[1].className = "move-button selected";
+            break;
+        case "right":
+            moveButtons[1].disabled = true;
+            moveButtons[2].className = "move-button selected";
+            break;
+        case "down":
+            moveButtons[0].disabled = true;
+            moveButtons[3].className = "move-button selected";
+    }
+}
+
 
 const changeDirectionFromKey = (e) => {
     let oldDirection = direction;
+
+    // We disallow direction opposite to current direction.
     switch (e.key.toLowerCase()) {
         case "w": 
             if (direction != "down") direction = "up";
@@ -186,28 +215,42 @@ const changeDirectionFromKey = (e) => {
         case "d":
             if (direction != "left") direction = "right";
     }
+
     if (oldDirection != direction) {
         console.log(direction);
+        toggleMoveButtons();
     }
 }
 
 const changeDirectionFromButton = (i) => {
     let oldDirection = direction;
+
+    // We disallow direction opposite to current direction.
     switch (i) {
         case 0: 
-            if (direction != "down") direction = "up";
+            if (direction != "down") {
+                direction = "up";
+            }
             break;
         case 1:
-            if (direction != "right") direction = "left";
+            if (direction != "right") {
+                direction = "left";
+            }
             break;
         case 3:
-            if (direction != "up") direction = "down";
+            if (direction != "up") {
+                direction = "down";
+            }
             break;
         case 2:
-            if (direction != "left") direction = "right";
+            if (direction != "left") {
+                direction = "right";
+            };
     }
+    
     if (oldDirection != direction) {
         console.log(direction);
+        toggleMoveButtons();
     }
 }
 
