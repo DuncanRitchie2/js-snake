@@ -36,15 +36,11 @@ h1 {
     margin: 18px 0 9px;
 }
 
-#rubric {
-    padding: 0 12px 6px;
-}
-
 .not-hidden {
     max-height: 500px;
     clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
     opacity: 1;
-    transition: clip-path 2s, max-height 2s, opacity 2s;
+    transition: clip-path 2s, max-height 2s ease-out, opacity 2s;
 }
 
 .hidden {
@@ -52,12 +48,52 @@ h1 {
     max-height: 0;
     clip-path: polygon(0 0, 100% 0, 0 0, 100% 0);
     opacity: 0;
-    transition: clip-path 2s, max-height 2s, opacity 2s;
+    transition: clip-path 2s, max-height 1s, opacity 2s;
+}
+
+#rubric {
+    padding: 0 12px 6px;
 }
 
 #rubric p {
     margin-top: 0;
     margin-bottom: 9px;
+}
+
+#move-buttons-ul {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    clip-path: circle();
+    transform: rotateZ(-45deg);
+}
+
+#move-buttons-ul li {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    margin: 0
+}
+
+.move-button {
+    font-family: inherit;
+    font-size: 18px;
+    background-image: linear-gradient(to bottom right, lightgrey, grey);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.move-button span {
+    display: inline-block;
+    transform: rotateZ(45deg);
+    width: 36px;
+    line-height: 36px;
 }
 
 #board {

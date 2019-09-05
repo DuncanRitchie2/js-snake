@@ -48,7 +48,8 @@ const lengthP = document.getElementById("length-p");
 const lengthSpan = document.getElementById("length-span");
 const startButton = document.getElementById("start-button");
 const rubric = document.getElementById("rubric");
-const moveButtonsDiv = document.getElementById("move-buttons-div");
+const moveButtonsUl = document.getElementById("move-buttons-ul");
+const moveButtons = document.getElementsByClassName("move-button");
 
 
 
@@ -170,7 +171,7 @@ const moveSnake = () => {
 }
 
 
-const changeDirection = (e) => {
+const changeDirectionFromKey = (e) => {
     let oldDirection = direction;
     switch (e.key.toLowerCase()) {
         case "w": 
@@ -190,15 +191,35 @@ const changeDirection = (e) => {
     }
 }
 
+const changeDirectionFromButton = (i) => {
+    let oldDirection = direction;
+    switch (i) {
+        case 0: 
+            if (direction != "down") direction = "up";
+            break;
+        case 1:
+            if (direction != "right") direction = "left";
+            break;
+        case 3:
+            if (direction != "up") direction = "down";
+            break;
+        case 2:
+            if (direction != "left") direction = "right";
+    }
+    if (oldDirection != direction) {
+        console.log(direction);
+    }
+}
+
 const startGame = () => {
-    document.addEventListener("keydown",changeDirection);
+    document.addEventListener("keydown",changeDirectionFromKey);
     startButton.remove();
     const interval = setInterval(moveSnake, 200);
     placeSnake();
     rubric.style.flex = 0;
     lengthP.style.display = "initial";
     toggleElementVisibility(rubric);
-    toggleElementVisibility(moveButtonsDiv);
+    toggleElementVisibility(moveButtonsUl);
 }
 
 ////
@@ -208,3 +229,7 @@ const startGame = () => {
 placeFood();
 
 startButton.addEventListener("click",startGame);
+
+for (let i = 0; i < moveButtons.length; i++) {
+    moveButtons[i].addEventListener("click",()=>{changeDirectionFromButton(i)});
+}
