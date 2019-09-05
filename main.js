@@ -47,12 +47,23 @@ const snakeJointDivs = document.getElementsByClassName("snake-joint");
 const lengthP = document.getElementById("length-p");
 const lengthSpan = document.getElementById("length-span");
 const startButton = document.getElementById("start-button");
+const rubric = document.getElementById("rubric");
+const moveButtonsDiv = document.getElementById("move-buttons-div");
 
 
 
 ////
 //// LOGIC
 ////
+
+const toggleElementVisibility = (el) => {
+    if (el.className == "hidden") {
+        el.className = "not-hidden";
+    }
+    else {
+        el.className = "hidden";
+    }
+}
 
 const placeFood = () => {
     // Randomize values of x and y.
@@ -184,7 +195,10 @@ const startGame = () => {
     startButton.remove();
     const interval = setInterval(moveSnake, 200);
     placeSnake();
+    rubric.style.flex = 0;
     lengthP.style.display = "initial";
+    toggleElementVisibility(rubric);
+    toggleElementVisibility(moveButtonsDiv);
 }
 
 ////

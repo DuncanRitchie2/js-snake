@@ -9,10 +9,30 @@
     <link rel="icon" type="image/x-icon" href="https://www.duncanritchie.co.uk/favicon.ico">
 </head>
 <body>
-    <h1>
-        Duncan&rsquo;s Snake
-    </h1>
     <div id="main">
+        <h1>
+            Duncan&rsquo;s Snake
+        </h1>
+        <div id="rubric" class="not-hidden">
+            <p>
+                Click &ldquo;Start game!&rdquo; and use the WASD keys to change your snake&rsquo;s direction.
+            </p>
+            <p>
+                The snake grows when its head (dark green) collides with the food, and the food moves to a new position.
+            </p>
+            <p>
+                Your snake can go through the edge of the board and appear on the other side.
+            </p>
+            <p>
+                It can also move through itself.
+            </p>
+        </div>
+        <div id="move-buttons-div" class="hidden">
+            <button id="move-up">Up</button>
+            <button id="move-left">Left</button>
+            <button id="move-right">Right</button>
+            <button id="move-down">Down</button>
+        </div>
         <div id="board">
             <div id="food"></div>
             <div id="snake-head" class="snake-joint"></div>

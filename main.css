@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Alegreya&display=swap');
 
+html {
+    height: 100%;
+    min-height: 100%;
+}
+
 body {
     font-family: 'Alegreya', serif;
     text-align: center;
     margin: 0;
     padding: 0;
-    height: 100%;
+    min-height: 100%;
     background-image: linear-gradient(to top, hotpink, salmon);
     background-attachment: fixed;
     display: flex;
@@ -21,6 +26,38 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 60px;
+}
+
+h1 {
+    background-image: linear-gradient(salmon, hotpink, salmon);
+    width: 100%;
+    padding: 6px;
+    margin: 18px 0 9px;
+}
+
+#rubric {
+    padding: 0 12px 6px;
+}
+
+.not-hidden {
+    max-height: 500px;
+    clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+    opacity: 1;
+    transition: clip-path 2s, max-height 2s, opacity 2s;
+}
+
+.hidden {
+    padding: 0 12px 6px;
+    max-height: 0;
+    clip-path: polygon(0 0, 100% 0, 0 0, 100% 0);
+    opacity: 0;
+    transition: clip-path 2s, max-height 2s, opacity 2s;
+}
+
+#rubric p {
+    margin-top: 0;
+    margin-bottom: 9px;
 }
 
 #board {
@@ -49,7 +86,7 @@ body {
     top: 40px;
     width: 20px;
     height: 20px;
-    background-image: radial-gradient(circle at top, rgb(149, 179, 67), rgb(25, 56, 0));
+    background-image: radial-gradient(circle at top, rgb(147, 170, 84), rgb(34, 65, 9));
     border-radius: 50%;
 }
 
