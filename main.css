@@ -53,7 +53,7 @@ h1 {
 }
 
 #rubric {
-    padding: 0 12px 6px;
+    padding: 0 12px;
 }
 
 #rubric p {
@@ -122,7 +122,7 @@ button {
     position: relative;
     width: 340px;
     height: 340px;
-    background-image: radial-gradient(circle at top, rgb(252, 248, 232), rgb(240, 210, 173));
+    background-image: radial-gradient(circle at top, rgb(255, 251, 244), rgb(240, 210, 173));
     border: 3px solid #484848;
 }
 
