@@ -51,6 +51,7 @@ const lengthSpan = document.getElementById("length-span");
 const startButton = document.getElementById("start-button");
 const pauseButton = document.getElementById("pause-button");
 const resumeButton = document.getElementById("resume-button");
+const resetButton = document.getElementById("reset-button");
 const rubric = document.getElementById("rubric");
 const moveButtonsUl = document.getElementById("move-buttons-ul");
 const moveButtons = document.getElementsByClassName("move-button");
@@ -128,6 +129,7 @@ const gameOver = () => {
     toggleElementVisibility(pauseButton);
     toggleElementVisibility(gameOverMessage);
     toggleElementVisibility(lengthP);
+    toggleElementVisibility(resetButton);
 
     // Ensure snake-head is visible over the joint it's eating.
     snakeHeadDiv.style.zIndex = 1;
@@ -347,8 +349,9 @@ const startGame = () => {
     // Add event-listener to pause.
     pauseButton.addEventListener("click", pauseGame)
 
-    // resume-button is hidden, but let's add an event-listener for if it get displayed.
-    resumeButton.addEventListener("click", resumeGame)
+    // resume-button and reset-button are hidden, but let's add event-listeners for if they will get displayed.
+    resumeButton.addEventListener("click", resumeGame);
+    resetButton.addEventListener("click", ()=>{location.reload()})
 }
 
 ////
