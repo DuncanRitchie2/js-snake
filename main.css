@@ -175,25 +175,25 @@ button:not(.hidden):not(.move-button) {
 
 /* Footer and unordered lists */
 
-ul {
-    padding: 0
-}
-
-li {
-    list-style-type: none;
-}
-
 footer {
     position: fixed;
     bottom: 0;
     width: calc(100% - 24px);
     margin: 0 auto;
     padding: 12px;
+    background-image: linear-gradient(to bottom, rgb(255, 44, 150), rgb(255, 135, 88));
+    z-index: 2;
+}
+
+footer ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    background-image: linear-gradient(to bottom, rgb(255, 44, 150), rgb(255, 135, 88));
-    z-index: 2;
+    padding: 0
+}
+
+footer ul li {
+    list-style-type: none;
 }
 
 a:link {
