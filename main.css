@@ -142,7 +142,8 @@ button:not(.hidden):not(.move-button) {
     top: 200px;
     width: 20px;
     height: 20px;
-    background-image: url(https://wpclipart.com/animals/M/mouse/mouse_2/mouse_T.png);
+    /* Background gradient is so the food is visible even if the mouse picture fails to load. */
+    background-image: url(./mouse_T.png) radial-gradient(rgb(255, 44, 150), transparent, transparent);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
